@@ -32,7 +32,7 @@ def ellipse_loss(y_true, y_pred):
 
     angle_loss_total = K.sum(K.switch(is_ellipse_bool, angle_loss, zeros)) / (K.sum(is_ellipse) + K.epsilon())
 
-    return 10 * is_ellipse_loss + 5 * shape_loss + angle_loss_total
+    return is_ellipse_loss + shape_loss + angle_loss_total
 
 
 def classifier_accuracy(y_true, y_pred):
