@@ -13,7 +13,9 @@ from data_gen import DataGenerator
 from metrics import *
 from keras.optimizers import Adam, SGD
 from model import LIGHT, FullyConnected
-image_path = './images/train/'
+train_image_path = './images/train/'
+test_image_path = './images/test/'
+
 target_path = './train_data.txt'
 
 time_stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -29,10 +31,10 @@ file_names_test, gt_test, n_test = data_preprocessing.load_metadata('test')
 
 
 gt_train, gt_test, shape_mean, shape_std = normalize_data(gt_train, gt_test)
-training_generator = DataGenerator(list(range(len(file_names_train))), file_names_train, image_path, gt_train,
+training_generator = DataGenerator(list(range(len(file_names_train))), file_names_train, train_image_path, gt_train,
                                    dim=(50, 50), batch_size=BATCH, shuffle=True)
 
-validation_generator = DataGenerator(list(range(len(file_names_test))), file_names_test, image_path, gt_test,
+validation_generator = DataGenerator(list(range(len(file_names_test))), file_names_test, test_image_path, gt_test,
                                      dim=(50, 50), batch_size=BATCH, shuffle=False)
 model = FullyConnected()
 epochs = 1000
